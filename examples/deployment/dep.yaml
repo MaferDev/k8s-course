@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-test
+  labels:
+    app: front
+spec:
+  # revisionHistoryLimit: 2
+  replicas: 3
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      annotations:
+        change-cause: "Change to port 100"
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: cont1
+        image: nginx:alpine
+        ports:
+          - containerPort: 100
