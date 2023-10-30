@@ -7,8 +7,20 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 1Gi
+    storage: 1Gi  # Capacidad
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce # Modo de acceso (puede ser ReadWriteOnce, ReadOnlyMany, o ReadWriteMany)
   hostPath:
     path: "/test"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pvc-claim # Nombre del PVC
+spec:
+  storageClassName: manual  # Nombre de la clase de almacenamiento (si se usa una)
+  accessModes:
+    - ReadWriteOnce  # Modo de acceso (puede ser ReadWriteOnce, ReadOnlyMany, o ReadWriteMany)
+  resources:
+    requests:
+      storage: 1Gi  # Tamaño del almacenamiento solicitado
