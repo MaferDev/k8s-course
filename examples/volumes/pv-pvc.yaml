@@ -14,6 +14,21 @@ spec:
     path: "/test"
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume2
+  labels:
+    mysql: ready
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mysql"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: task-pvc-claim # Nombre del PVC
@@ -24,3 +39,6 @@ spec:
   resources:
     requests:
       storage: 1Gi  # Tamaño del almacenamiento solicitado
+  selector:  # Agrega el selector aquí
+    matchLabels:
+      mysql: ready
